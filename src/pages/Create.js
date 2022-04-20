@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
@@ -19,6 +20,9 @@ export default function Create() {
   /*  to use that in components just add in props:
     className={classes.title}
   */
+
+  /* Used to redirect to a page */
+  const history = useHistory();
 
   /* States */
   const [title, setTitle] = useState('');
@@ -40,9 +44,11 @@ export default function Create() {
       setErrorDetails(true);
     }
     if (title && details) {
-      console.log(`Title: ${title}`);
-      console.log(`Details: ${details}`);
-      console.log(`Category: ${category}`);
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ title, details, category }),
+      }).then(() => history.push('/'));
     }
   };
 

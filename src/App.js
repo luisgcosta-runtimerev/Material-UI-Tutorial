@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Notes from './pages/Notes'
-import Create from './pages/Create'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
+import Notes from './pages/Notes';
+import Create from './pages/Create';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fefefe'
+      main: '#fefefe',
     },
-    secondary: purple
+    secondary: purple,
   },
   typography: {
     fontFamily: 'Quicksand',
@@ -17,8 +17,8 @@ const theme = createTheme({
     fontWeightRegular: 500,
     fontWeightMedium: 600,
     fontWeightBold: 700,
-  }
-})
+  },
+});
 
 function App() {
   return (
