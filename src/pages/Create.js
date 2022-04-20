@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Typography } from '@mui/material'
+import { FormControlLabel, FormLabel, Typography, FormControl } from '@mui/material'
 import { Button } from '@mui/material'
 import { Container } from '@mui/material'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Radio, RadioGroup } from '@mui/material';
 
 const useStyles = makeStyles({
   field: {
@@ -25,7 +26,7 @@ export default function Create() {
   const [details, setDetails] = useState('')
   const [errorTitle, setErrorTitle] = useState(false)
   const [errorDetails, setErrorDetails] = useState(false)
-
+  const [category, setCategory] = useState('todos')
 
   /* Handle Submit function */
   const handleSubmit = (e) => {
@@ -42,6 +43,7 @@ export default function Create() {
     if(title && details){
       console.log('Title: ' + title)
       console.log('Details: ' + details)
+      console.log('Category: ' + category)
     }
 
   }
@@ -58,8 +60,9 @@ export default function Create() {
         </Typography>
 
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <div className={classes.field}>
+
           <TextField
+            className={classes.field}
             onChange={(e) => setTitle(e.currentTarget.value)}
             label="Note Title"
             color="secondary"
@@ -68,9 +71,10 @@ export default function Create() {
             required
             error={errorTitle}
           />
-          </div>
-          <div className={classes.field}>
+
+
           <TextField
+            className={classes.field}
             onChange={(e) => setDetails(e.currentTarget.value)}
             label="Details"
             color="secondary"
@@ -81,7 +85,18 @@ export default function Create() {
             rows={4}
             error={errorDetails}
           />
-          </div>
+
+
+          <FormControl className={classes.field}>
+            <FormLabel color="secondary">Note Category</FormLabel>
+            <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+              <FormControlLabel value="money" control={<Radio color="secondary"/>} label="Money"/>
+              <FormControlLabel value="todos" control={<Radio color="secondary" />} label="Todos"/>
+              <FormControlLabel value="reminders" control={<Radio color="secondary"/>} label="Reminders"/>
+              <FormControlLabel value="work" control={<Radio color="secondary"/>} label="Work"/>
+            </RadioGroup>
+          </FormControl>
+
           <Button
           type="submit"
           color="secondary"
