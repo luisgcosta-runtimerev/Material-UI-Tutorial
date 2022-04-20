@@ -3,7 +3,6 @@ import Notes from './pages/Notes'
 import Create from './pages/Create'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
-import { fontWeight } from '@mui/system';
 
 const theme = createTheme({
   palette: {
