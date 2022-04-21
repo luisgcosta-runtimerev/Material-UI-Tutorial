@@ -5,10 +5,24 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import { Typography, IconButton } from '@mui/material';
 import { DeleteOutlined } from '@mui/icons-material';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  test: {
+    border: (note) => {
+      if (note.category === 'work') {
+        return '1px solid red';
+      }
+      return '';
+    },
+  },
+});
 
 export default function NoteCard({ note, handleDelete }) {
+  const classes = useStyles(note);
+
   return (
-    <Card elevation={1}>
+    <Card elevation={1} className={classes.test}>
       <CardHeader
         title={note.title}
         subheader={note.category}
