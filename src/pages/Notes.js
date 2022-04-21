@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
+import Masonry from 'react-masonry-css';
+import { makeStyles } from '@mui/styles';
 import NoteCard from '../components/NoteCard';
+
+const useStyles = makeStyles({
+  myMasonryGrid: {
+    display: 'flex',
+    marginLeft: '-30px' /* gutter size offset */,
+    width: 'auto'
+  },
+  myMasonryGridColumn: {
+    paddingLeft: '30px' /* gutter size */,
+    backgroundClip: 'padding-box'
+  },
+  note: {
+    marginBottom: '30px'
+  }
+});
 
 export default function Notes() {
   const [notes, setNotes] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     fetch('http://localhost:8000/notes')
@@ -20,15 +38,25 @@ export default function Notes() {
     setNotes(newNotes);
   };
 
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1
+  };
+
   return (
     <Container>
-      <Grid container spacing={3}>
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className={classes.myMasonryGrid}
+        columnClassName={classes.myMasonryGridColumn}
+      >
         {notes.map((note) => (
-          <Grid item xs={12} sm={6} md={3} key={note.id}>
+          <div className={classes.note} key={note.id}>
             <NoteCard note={note} handleDelete={handleDelete} />
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </Masonry>
     </Container>
   );
 }
