@@ -1,6 +1,6 @@
-import React from "react";
-import PropType from "prop-types";
-import { makeStyles } from "@mui/styles";
+import React from 'react';
+import PropType from 'prop-types';
+import { makeStyles } from '@mui/styles';
 import {
   AppBar,
   Toolbar,
@@ -10,41 +10,45 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from "@mui/material";
-import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
-import { useHistory, useLocation } from "react-router-dom";
-import { format } from "date-fns";
+  Avatar
+} from '@mui/material';
+import { AddCircleOutlined, SubjectOutlined } from '@mui/icons-material';
+import { useHistory, useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex'
   },
   page: {
-    background: "#f9f9f9",
-    width: "100%",
-    padding: theme.spacing(3),
+    background: '#f9f9f9',
+    width: '100%',
+    padding: theme.spacing(3)
   },
   drawer: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   active: {
-    background: "#f4f4f4",
+    background: '#f4f4f4'
   },
   title: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   appbar: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}px)`
   },
   toolbar: theme.mixins.toolbar,
   date: {
-    flexGrow: 1,
+    flexGrow: 1
   },
+  avatar: {
+    marginLeft: theme.spacing(2)
+  }
 }));
 
 export default function Layout({ children }) {
@@ -54,15 +58,15 @@ export default function Layout({ children }) {
 
   const menuItems = [
     {
-      text: "My notes",
+      text: 'My notes',
       icon: <SubjectOutlined color="secondary" />,
-      path: "/",
+      path: '/'
     },
     {
-      text: "Create Note",
+      text: 'Create Note',
       icon: <AddCircleOutlined color="secondary" />,
-      path: "/create",
-    },
+      path: '/create'
+    }
   ];
 
   return (
@@ -71,9 +75,10 @@ export default function Layout({ children }) {
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar>
           <Typography className={classes.date}>
-            Today is the {format(new Date(), "do MMMM Y")}
+            Today is the {format(new Date(), 'do MMMM Y')}
           </Typography>
           <Typography>Luigi</Typography>
+          <Avatar src="/img/luigi.png" className={classes.avatar} />
         </Toolbar>
       </AppBar>
 
@@ -118,5 +123,5 @@ export default function Layout({ children }) {
 
 /* TypeChecking props of a component */
 Layout.propTypes = {
-  children: PropType.any,
+  children: PropType.any
 };

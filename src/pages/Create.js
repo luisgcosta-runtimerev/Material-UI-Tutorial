@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   FormControlLabel,
   FormLabel,
@@ -8,18 +8,18 @@ import {
   Container,
   TextField,
   Radio,
-  RadioGroup,
-} from "@mui/material";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { makeStyles } from "@mui/styles";
-import { useHistory } from "react-router-dom";
+  RadioGroup
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBottom: 20,
-    display: "block",
-  },
+    display: 'block'
+  }
 });
 
 export default function Create() {
@@ -32,11 +32,11 @@ export default function Create() {
   const history = useHistory();
 
   /* States */
-  const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
+  const [title, setTitle] = useState('');
+  const [details, setDetails] = useState('');
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDetails, setErrorDetails] = useState(false);
-  const [category, setCategory] = useState("todos");
+  const [category, setCategory] = useState('todos');
 
   /* Handle Submit function */
   const handleSubmit = (e) => {
@@ -51,11 +51,11 @@ export default function Create() {
       setErrorDetails(true);
     }
     if (title && details) {
-      fetch("http://localhost:8000/notes", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ title, details, category }),
-      }).then(() => history.push("/"));
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ title, details, category })
+      }).then(() => history.push('/'));
     }
   };
 
