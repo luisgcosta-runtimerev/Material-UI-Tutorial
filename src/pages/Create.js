@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  FormControlLabel, FormLabel, Typography, FormControl,
-  Button, Container, TextField, Radio, RadioGroup,
-} from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { makeStyles } from '@mui/styles';
-import { useHistory } from 'react-router-dom';
+  FormControlLabel,
+  FormLabel,
+  Typography,
+  FormControl,
+  Button,
+  Container,
+  TextField,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBottom: 20,
-    display: 'block',
+    display: "block",
   },
 });
 
@@ -25,11 +32,11 @@ export default function Create() {
   const history = useHistory();
 
   /* States */
-  const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDetails, setErrorDetails] = useState(false);
-  const [category, setCategory] = useState('todos');
+  const [category, setCategory] = useState("todos");
 
   /* Handle Submit function */
   const handleSubmit = (e) => {
@@ -44,11 +51,11 @@ export default function Create() {
       setErrorDetails(true);
     }
     if (title && details) {
-      fetch('http://localhost:8000/notes', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+      fetch("http://localhost:8000/notes", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify({ title, details, category }),
-      }).then(() => history.push('/'));
+      }).then(() => history.push("/"));
     }
   };
 
@@ -64,7 +71,6 @@ export default function Create() {
       </Typography>
 
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-
         <TextField
           className={classes.field}
           onChange={(e) => setTitle(e.currentTarget.value)}
@@ -91,11 +97,30 @@ export default function Create() {
 
         <FormControl className={classes.field}>
           <FormLabel color="secondary">Note Category</FormLabel>
-          <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
-            <FormControlLabel value="money" control={<Radio color="secondary" />} label="Money" />
-            <FormControlLabel value="todos" control={<Radio color="secondary" />} label="Todos" />
-            <FormControlLabel value="reminders" control={<Radio color="secondary" />} label="Reminders" />
-            <FormControlLabel value="work" control={<Radio color="secondary" />} label="Work" />
+          <RadioGroup
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <FormControlLabel
+              value="money"
+              control={<Radio color="secondary" />}
+              label="Money"
+            />
+            <FormControlLabel
+              value="todos"
+              control={<Radio color="secondary" />}
+              label="Todos"
+            />
+            <FormControlLabel
+              value="reminders"
+              control={<Radio color="secondary" />}
+              label="Reminders"
+            />
+            <FormControlLabel
+              value="work"
+              control={<Radio color="secondary" />}
+              label="Work"
+            />
           </RadioGroup>
         </FormControl>
 

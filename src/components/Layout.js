@@ -1,22 +1,29 @@
-import React from 'react';
-import PropType from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import PropType from "prop-types";
+import { makeStyles } from "@mui/styles";
 import {
-  AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography,
-} from '@mui/material';
-import { AddCircleOutlined, SubjectOutlined } from '@mui/icons-material';
-import { useHistory, useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
+  AppBar,
+  Toolbar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
+import { useHistory, useLocation } from "react-router-dom";
+import { format } from "date-fns";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   page: {
-    background: '#f9f9f9',
-    width: '100%',
+    background: "#f9f9f9",
+    width: "100%",
     padding: theme.spacing(3),
   },
   drawer: {
@@ -26,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   active: {
-    background: '#f4f4f4',
+    background: "#f4f4f4",
   },
   title: {
     padding: theme.spacing(2),
@@ -47,33 +54,26 @@ export default function Layout({ children }) {
 
   const menuItems = [
     {
-      text: 'My notes',
+      text: "My notes",
       icon: <SubjectOutlined color="secondary" />,
-      path: '/',
+      path: "/",
     },
     {
-      text: 'Create Note',
+      text: "Create Note",
       icon: <AddCircleOutlined color="secondary" />,
-      path: '/create',
+      path: "/create",
     },
   ];
 
   return (
     <div className={classes.root}>
       {/* app navbar */}
-      <AppBar
-        className={classes.appbar}
-        elevation={0}
-      >
+      <AppBar className={classes.appbar} elevation={0}>
         <Toolbar>
           <Typography className={classes.date}>
-            Today is the
-            {' '}
-            { format(new Date(), 'do MMMM Y')}
+            Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>
-            Luigi
-          </Typography>
+          <Typography>Luigi</Typography>
         </Toolbar>
       </AppBar>
 
@@ -85,11 +85,7 @@ export default function Layout({ children }) {
         classes={{ paper: classes.drawerPaper }}
       >
         <div>
-          <Typography
-            variant="h5"
-            align="center"
-            className={classes.title}
-          >
+          <Typography variant="h5" align="center" className={classes.title}>
             Material UI Tutorial
           </Typography>
         </div>
@@ -100,16 +96,15 @@ export default function Layout({ children }) {
               button
               key={item.text}
               onClick={() => history.push(item.path)}
-              className={location.pathname === item.path ? classes.active : null}
+              className={
+                location.pathname === item.path ? classes.active : null
+              }
             >
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
+              <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
           ))}
         </List>
-
       </Drawer>
 
       {/* app body */}
