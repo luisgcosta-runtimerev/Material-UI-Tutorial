@@ -27,7 +27,7 @@ export default function NoteCard({ note, handleDelete }) {
   );
 }
 
-/* TypeChecking a prop of component */
+/* TypeChecking props of a component */
 NoteCard.propTypes = {
   note: PropTypes.object,
   handleDelete: PropTypes.func,
