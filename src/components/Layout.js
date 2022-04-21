@@ -1,7 +1,11 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { makeStyles } from '@mui/styles';
-import { Drawer, Typography } from '@mui/material';
+import {
+  Drawer, List, ListItem, ListItemIcon, ListItemText, Typography,
+} from '@mui/material';
+import { AddCircleOutlined, SubjectOutlined } from '@mui/icons-material';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -19,10 +23,28 @@ const useStyles = makeStyles({
   drawerPaper: {
     width: drawerWidth,
   },
+  active: {
+    background: '#f4f4f4',
+  },
 });
 
 export default function Layout({ children }) {
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
+
+  const menuItems = [
+    {
+      text: 'My notes',
+      icon: <SubjectOutlined color="secondary" />,
+      path: '/',
+    },
+    {
+      text: 'Create Note',
+      icon: <AddCircleOutlined color="secondary" />,
+      path: '/create',
+    },
+  ];
 
   return (
     <div className={classes.root}>
@@ -36,10 +58,27 @@ export default function Layout({ children }) {
         classes={{ paper: classes.drawerPaper }}
       >
         <div>
-          <Typography variant="h5">
-            Luis Costa
+          <Typography variant="h5" align="center">
+            Material UI Tutorial
           </Typography>
         </div>
+
+        <List>
+          {menuItems.map((item) => (
+            <ListItem
+              button
+              key={item.text}
+              onClick={() => history.push(item.path)}
+              className={location.pathname === item.path ? classes.active : null}
+            >
+              <ListItemIcon>
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          ))}
+        </List>
+
       </Drawer>
 
       {/* app body */}
