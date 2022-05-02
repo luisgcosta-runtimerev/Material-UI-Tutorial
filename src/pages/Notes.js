@@ -25,13 +25,13 @@ export default function Notes() {
   const classes = useStyles();
 
   useEffect(() => {
-    fetch(`https://material-ui-json-server.glitch.me/notes`)
+    fetch(`${process.env.JSON_SERVER_URL}/notes`)
       .then((res) => res.json())
       .then((data) => setNotes(data));
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`https://material-ui-json-server.glitch.me/notes/${id}`, {
+    await fetch(`${process.env.JSON_SERVER_URL}/notes/${id}`, {
       method: 'DELETE'
     });
 

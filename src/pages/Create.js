@@ -53,7 +53,7 @@ export default function Create() {
     }
 
     if (title && details) {
-      fetch(`https://material-ui-json-server.glitch.me/notes`, {
+      fetch(`${process.env.JSON_SERVER_URL}/notes`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ title, details, category })
