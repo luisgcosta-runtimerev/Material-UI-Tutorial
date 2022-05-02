@@ -13,6 +13,7 @@ import {
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from '@mui/styles';
 import { useHistory } from 'react-router-dom';
+import 'dotenv/config';
 
 const useStyles = makeStyles({
   field: {
@@ -50,8 +51,9 @@ export default function Create() {
     if (!details) {
       setErrorDetails(true);
     }
+
     if (title && details) {
-      fetch('http://localhost:8000/notes', {
+      fetch(`${process.env.JSON_SERVER_URL}/notes`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ title, details, category })

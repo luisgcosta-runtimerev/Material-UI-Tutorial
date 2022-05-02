@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import Masonry from 'react-masonry-css';
 import { makeStyles } from '@mui/styles';
 import NoteCard from '../components/NoteCard';
+import 'dotenv/config';
 
 const useStyles = makeStyles({
   myMasonryGrid: {
@@ -24,13 +25,13 @@ export default function Notes() {
   const classes = useStyles();
 
   useEffect(() => {
-    fetch('http://localhost:8000/notes')
+    fetch(`${process.env.JSON_SERVER_URL}/notes`)
       .then((res) => res.json())
       .then((data) => setNotes(data));
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8000/notes/${id}`, {
+    await fetch(`${process.env.JSON_SERVER_URL}/notes/${id}`, {
       method: 'DELETE'
     });
 
